@@ -1,6 +1,6 @@
 ﻿namespace client
 {
-    partial class Form1
+    partial class formGame
     {
         /// <summary>
         ///  Required designer variable.
@@ -28,83 +28,98 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.textBoxSend = new System.Windows.Forms.TextBox();
+            this.buttonSendTextToServer = new System.Windows.Forms.Button();
+            this.textBoxReceive = new System.Windows.Forms.TextBox();
+            this.labelSend = new System.Windows.Forms.Label();
+            this.labelReceive = new System.Windows.Forms.Label();
+            this.labelServerIP = new System.Windows.Forms.Label();
+            this.textBoxServerIP = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // textBox1
+            // textBoxSend
             // 
-            this.textBox1.Location = new System.Drawing.Point(230, 108);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(357, 27);
-            this.textBox1.TabIndex = 0;
+            this.textBoxSend.Location = new System.Drawing.Point(135, 136);
+            this.textBoxSend.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxSend.Name = "textBoxSend";
+            this.textBoxSend.Size = new System.Drawing.Size(313, 23);
+            this.textBoxSend.TabIndex = 0;
             // 
-            // button1
+            // buttonSendTextToServer
             // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.Location = new System.Drawing.Point(293, 192);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(233, 29);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Send Text to Server";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonSendTextToServer.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buttonSendTextToServer.Location = new System.Drawing.Point(190, 199);
+            this.buttonSendTextToServer.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSendTextToServer.Name = "buttonSendTextToServer";
+            this.buttonSendTextToServer.Size = new System.Drawing.Size(204, 22);
+            this.buttonSendTextToServer.TabIndex = 1;
+            this.buttonSendTextToServer.Text = "Send Text to Server";
+            this.buttonSendTextToServer.UseVisualStyleBackColor = true;
+            this.buttonSendTextToServer.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox2
+            // textBoxReceive
             // 
-            this.textBox2.Location = new System.Drawing.Point(230, 288);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(357, 27);
-            this.textBox2.TabIndex = 2;
+            this.textBoxReceive.Location = new System.Drawing.Point(135, 271);
+            this.textBoxReceive.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textBoxReceive.Name = "textBoxReceive";
+            this.textBoxReceive.Size = new System.Drawing.Size(313, 23);
+            this.textBoxReceive.TabIndex = 2;
             // 
-            // label1
+            // labelSend
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(230, 85);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Send";
+            this.labelSend.AutoSize = true;
+            this.labelSend.Location = new System.Drawing.Point(135, 119);
+            this.labelSend.Name = "labelSend";
+            this.labelSend.Size = new System.Drawing.Size(33, 15);
+            this.labelSend.TabIndex = 3;
+            this.labelSend.Text = "Send";
             // 
-            // label2
+            // labelReceive
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(230, 265);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(60, 20);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Receive";
+            this.labelReceive.AutoSize = true;
+            this.labelReceive.Location = new System.Drawing.Point(135, 254);
+            this.labelReceive.Name = "labelReceive";
+            this.labelReceive.Size = new System.Drawing.Size(47, 15);
+            this.labelReceive.TabIndex = 4;
+            this.labelReceive.Text = "Receive";
             // 
-            // pictureBox1
+            // labelServerIP
             // 
-            this.pictureBox1.Image = global::client.Properties.Resources.PNG_image;
-            this.pictureBox1.Location = new System.Drawing.Point(64, 129);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(125, 62);
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.labelServerIP.AutoSize = true;
+            this.labelServerIP.Location = new System.Drawing.Point(39, 26);
+            this.labelServerIP.Name = "labelServerIP";
+            this.labelServerIP.Size = new System.Drawing.Size(52, 15);
+            this.labelServerIP.TabIndex = 5;
+            this.labelServerIP.Text = "Server IP";
             // 
-            // Form1
+            // textBoxServerIP
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.textBoxServerIP.Location = new System.Drawing.Point(97, 23);
+            this.textBoxServerIP.Name = "textBoxServerIP";
+            this.textBoxServerIP.Size = new System.Drawing.Size(167, 23);
+            this.textBoxServerIP.TabIndex = 6;
+            // 
+            // formGame
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(584, 861);
+            this.Controls.Add(this.textBoxServerIP);
+            this.Controls.Add(this.labelServerIP);
+            this.Controls.Add(this.labelReceive);
+            this.Controls.Add(this.labelSend);
+            this.Controls.Add(this.textBoxReceive);
+            this.Controls.Add(this.buttonSendTextToServer);
+            this.Controls.Add(this.textBoxSend);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
+            this.Name = "formGame";
+            this.Text = "小朋友下樓梯 Remake";
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Form1_Closing);
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -112,11 +127,12 @@
 
         #endregion
 
-        private TextBox textBox1;
-        private Button button1;
-        private TextBox textBox2;
-        private Label label1;
-        private Label label2;
-        private PictureBox pictureBox1;
+        private TextBox textBoxSend;
+        private Button buttonSendTextToServer;
+        private TextBox textBoxReceive;
+        private Label labelSend;
+        private Label labelReceive;
+        private Label labelServerIP;
+        private TextBox textBoxServerIP;
     }
 }

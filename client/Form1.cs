@@ -3,10 +3,10 @@ using System.Text;
 
 namespace client
 {
-    public partial class Form1 : Form
+    public partial class formGame : Form
     {
         TcpClient client = null;
-        public Form1()
+        public formGame()
         {
             InitializeComponent();
         }
@@ -53,13 +53,13 @@ namespace client
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            if (textBox1.Text != String.Empty)
+            if (textBoxSend.Text != String.Empty)
             {
-                textBox2.Text = this.talkToServer(this.textBox1.Text);
+                textBoxReceive.Text = this.talkToServer(this.textBoxSend.Text);
             }
             else
             {
-                textBox2.Text = String.Empty;
+                textBoxReceive.Text = String.Empty;
             }
             
         }
