@@ -6,12 +6,15 @@ namespace client
     public partial class formgame : Form
     {
         TcpClient? client = null;
+        string dir = "";
         
         public formgame()
         {
             InitializeComponent();
-            Thread thread = new Thread(recieve_data);
-            thread.Start();
+            Thread get = new Thread(recieve_data);
+            get.Start();
+            Thread set = new Thread(talkToServer);
+            set.Start();
 
             KeyDown += Form_KeyDown!;
             KeyUp += Form_KeyUp!;
@@ -32,21 +35,25 @@ namespace client
             }
         }
 
-        private bool talkToServer(string message)
+        private void talkToServer()
         {
-            Byte[] data = Encoding.ASCII.GetBytes(message);
-
-            try
+            while (true)
             {
-                NetworkStream stream = client!.GetStream();
+                try
+                {
+                    Byte[] data = Encoding.ASCII.GetBytes(dir);
+                    client!.GetStream().Write(data, 0, data.Length);
+                }
+                catch (Exception)
+                {
 
-                stream.Write(data, 0, data.Length);
+                }
 
-                return true;
-            }
-            catch (Exception e)
-            {
-                return false;
+                DateTime now = DateTime.Now;
+                do
+                {
+                    Application.DoEvents();
+                } while ((DateTime.Now - now).TotalMilliseconds < 10);
             }
         }
 
@@ -77,19 +84,21 @@ namespace client
             switch (e.KeyCode)
             {
                 case Keys.Left:
-                    while (!talkToServer("2")) ;
+                case Keys.A:
+                    dir = "2";
                     break;
 
                 case Keys.Right:
-                    while (!talkToServer("3")) ;
+                case Keys.D:
+                    dir = "3";
                     break;
             }
         }
 
         private void Form_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Left || e.KeyCode == Keys.Right)
-                talkToServer("1");
+            if(e.KeyCode == Keys.Left || e.KeyCode == Keys.Right || e.KeyCode == Keys.A || e.KeyCode == Keys.D)
+                dir = "1";
         }
 
         private void Form_Load(object sender, EventArgs e)

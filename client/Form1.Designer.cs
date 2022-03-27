@@ -42,7 +42,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.player.BackColor = System.Drawing.Color.Lime;
-            this.player.Location = new System.Drawing.Point(395, 98);
+            this.player.Location = new System.Drawing.Point(418, 95);
             this.player.Name = "player";
             this.player.Size = new System.Drawing.Size(60, 90);
             this.player.TabIndex = 7;
@@ -51,7 +51,7 @@
             // block1
             // 
             this.block1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.block1.Location = new System.Drawing.Point(144, 392);
+            this.block1.Location = new System.Drawing.Point(134, 568);
             this.block1.Name = "block1";
             this.block1.Size = new System.Drawing.Size(300, 30);
             this.block1.TabIndex = 8;
@@ -60,7 +60,7 @@
             // block2
             // 
             this.block2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.block2.Location = new System.Drawing.Point(450, 392);
+            this.block2.Location = new System.Drawing.Point(554, 376);
             this.block2.Name = "block2";
             this.block2.Size = new System.Drawing.Size(300, 30);
             this.block2.TabIndex = 8;
