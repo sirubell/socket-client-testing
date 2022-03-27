@@ -69,8 +69,24 @@ namespace client
                     String responseData = String.Empty;
 
                     Int32 bytes = stream.Read(data, 0, data.Length);
-                    responseData = Encoding.ASCII.GetString(data, 0, bytes);
-
+                    //esponseData = Encoding.ASCII.GetString(data, 0, bytes);
+                    responseData = "1,2,3,4,5,klafj|1,2,3,4,1|32|lkfjdkls\njkfdakj\n";
+                    string[] first = responseData.Split('\n');
+                    string[] second = first[0].Split('|');
+                    string[] platform_strs = second[2].Split(',');
+                    int platform_x = int.Parse(platform_strs[0]);
+                    int platform_y = int.Parse(platform_strs[1]);
+                    int platform_w = int.Parse(platform_strs[2]);
+                    int platform_h = int.Parse(platform_strs[3]);
+                    int platform_type = int.Parse(platform_strs[4]);
+                    string[] player = second[1].Split(',');
+                    int player_x = int.Parse(player[0]);
+                    int player_y = int.Parse(player[1]);
+                    int player_w = int.Parse(player[2]);
+                    int player_h = int.Parse(player[3]);
+                    int player_heart = int.Parse(player[4]);
+                    string player_name = new string(player[5]);
+                    Console.WriteLine(player_x);
                 }
                 catch (Exception)
                 {
