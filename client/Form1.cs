@@ -5,7 +5,7 @@ namespace client
 {
     public partial class formgame : Form
     {
-        TcpClient? client = null;
+        TcpClient client = null;
 
         string dir = "";
         int num_player = 0;
@@ -18,8 +18,6 @@ namespace client
             get.Start();
             Thread set = new Thread(talkToServer);
             set.Start();
-
-
 
             KeyDown += Form_KeyDown!;
             KeyUp += Form_KeyUp!;
@@ -58,12 +56,13 @@ namespace client
 
         private void talkToServer()
         {
-            while (true)
+            if (client == null) return;
+            while (client.Connected)
             {
                 try
                 {
                     Byte[] data = Encoding.ASCII.GetBytes(dir);
-                    client!.GetStream().Write(data, 0, data.Length);
+                    client.GetStream().Write(data, 0, data.Length);
                 }
                 catch (Exception)
                 {
@@ -80,11 +79,12 @@ namespace client
 
         private void recieve_data()
         {
-            while (true)
+            if (client == null) return;
+            while (client.Connected)
             {
                 try
                 {
-                    NetworkStream stream = client!.GetStream();
+                    NetworkStream stream = client.GetStream();
 
                     Byte[] data = new Byte[256];
                     String responseData = String.Empty;
