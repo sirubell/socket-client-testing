@@ -111,7 +111,7 @@ namespace client
                 {
                     if(player.Name == cur)
                     {
-                        for (int i = 0; i < a.Count; i++)
+                        for (int i = 0; i < 3; i++)
                         {
                             PictureBox? temp = players.Find(x => x.Name == f);
                             if (temp != null)
