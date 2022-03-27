@@ -82,36 +82,63 @@ namespace client
             if (client == null) return;
             while (client.Connected)
             {
+                String responseData = String.Empty;
+
                 try
                 {
                     NetworkStream stream = client.GetStream();
 
                     Byte[] data = new Byte[256];
-                    String responseData = String.Empty;
+                    responseData = String.Empty;
 
                     Int32 bytes = stream.Read(data, 0, data.Length);
-                    //esponseData = Encoding.ASCII.GetString(data, 0, bytes);
-                    responseData = "1,2,3,4,5,klafj|1,2,3,4,1|32|lkfjdkls\njkfdakj\n";
-                    string[] first = responseData.Split('\n');
-                    string[] second = first[0].Split('|');
-                    string[] platform_strs = second[2].Split(',');
-                    int platform_x = int.Parse(platform_strs[0]);
-                    int platform_y = int.Parse(platform_strs[1]);
-                    int platform_w = int.Parse(platform_strs[2]);
-                    int platform_h = int.Parse(platform_strs[3]);
-                    int platform_type = int.Parse(platform_strs[4]);
-                    string[] player = second[1].Split(',');
-                    int player_x = int.Parse(player[0]);
-                    int player_y = int.Parse(player[1]);
-                    int player_w = int.Parse(player[2]);
-                    int player_h = int.Parse(player[3]);
-                    int player_heart = int.Parse(player[4]);
-                    string player_name = new string(player[5]);
-                    Console.WriteLine(player_x);
+                    responseData = Encoding.ASCII.GetString(data, 0, bytes);
                 }
                 catch (Exception)
                 {
 
+                }
+
+                //responseData = "1,2,3,4,5,klafj|1,2,3,4,1|32|lkfjdkls\njkfdakj\n";
+
+                string[] first = responseData.Split('\n');
+
+                string cur_player = first[0];
+                string[] all_players = first[1].Split('|');
+                string[] all_blocks = first[2].Split('|');
+
+                List<int> player_x = new List<int>();
+                List<int> player_y = new List<int>();
+                List<int> player_w = new List<int>();
+                List<int> player_h = new List<int>();
+                List<int> player_heart = new List<int>();
+                List<string> player_name = new List<string>();
+
+                foreach (string p in all_players)
+                {
+                    var temp = p.Split(',');
+                    player_x.Add(int.Parse(temp[0]));
+                    player_y.Add(int.Parse(temp[1]));
+                    player_w.Add(int.Parse(temp[2]));
+                    player_h.Add(int.Parse(temp[3]));
+                    player_heart.Add(int.Parse(temp[4]));
+                    player_name.Add(temp[5]);
+                }
+
+                List<int> block_x = new List<int>();
+                List<int> block_y = new List<int>();
+                List<int> block_w = new List<int>();
+                List<int> block_h = new List<int>();
+                List<int> block_type = new List<int>();
+
+                foreach (string b in all_blocks)
+                {
+                    var temp = b.Split(',');
+                    block_x.Add(int.Parse(temp[0]));
+                    block_y.Add(int.Parse(temp[1]));
+                    block_w.Add(int.Parse(temp[2]));
+                    block_h.Add(int.Parse(temp[3]));
+                    block_type.Add(int.Parse(temp[4]));
                 }
 
                 foreach (var player in players)
@@ -119,20 +146,17 @@ namespace client
                     player.Visible = false;
                 }
 
-                int x = 0, y = 0;
-                var f = "";
-                var cur = "";
                 foreach (var player in players)
                 {
-                    if(player.Name == cur)
+                    if(player.Name == cur_player)
                     {
-                        for (int i = 0; i < 3; i++)
+                        for (int i = 0; i < player_name.Count(); i++)
                         {
-                            PictureBox? temp = players.Find(x => x.Name == f);
+                            PictureBox? temp = players.Find(x => x.Name == player_name[i]);
                             if (temp != null)
                             {
-                                temp.Size = new Size(x, y);
-                                temp.Location = new Point(x, y);
+                                temp.Size = new Size(player_x[i], player_y[i]);
+                                temp.Location = new Point(player_h[i], player_w[i]);
                                 temp.Visible = true;
                                 temp.BackColor = Color.White;
                                 player.Parent = temp;
@@ -140,13 +164,12 @@ namespace client
                             else
                             {
                                 temp = new PictureBox();
-                                temp.Name = f;
-                                temp.Size = new Size(x, y);
-                                temp.Location = new Point(x, y);
+                                temp.Name = player_name[i];
+                                temp.Size = new Size(player_x[i], player_y[i]);
+                                temp.Location = new Point(player_h[i], player_w[i]);
                                 temp.Visible = true;
                                 temp.BackColor = Color.White;
                                 player.Parent = temp;
-
                                 players.Add(temp);
                             }
                         }
@@ -158,8 +181,9 @@ namespace client
                 
                 for (int i = 0; i < blocks.Count; i++)
                 {
-                    blocks[i].Location = new Point(x, y);
-                    blocks[i].Size = new Size(x, y);
+                    blocks[i].Location = new Point(block_x[i], block_y[i]);
+                    blocks[i].Size = new Size(block_h[i], block_w[i]);
+                    blocks[i].Visible = true;
                 }
 
                 DateTime now = DateTime.Now;
