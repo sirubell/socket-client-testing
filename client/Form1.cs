@@ -14,10 +14,7 @@ namespace client
         public formgame()
         {
             InitializeComponent();
-            Thread get = new Thread(recieve_data);
-            get.Start();
-            Thread set = new Thread(talkToServer);
-            set.Start();
+            
 
             KeyDown += Form_KeyDown!;
             KeyUp += Form_KeyUp!;
@@ -62,7 +59,7 @@ namespace client
                 try
                 {
                     Byte[] data = Encoding.ASCII.GetBytes(dir);
-                    client.GetStream().Write(data, 0, data.Length);
+                    client.GetStream().Write(data, 0, dir.Length);
                 }
                 catch (Exception)
                 {
@@ -79,20 +76,25 @@ namespace client
 
         private void recieve_data()
         {
-            if (client == null) return;
+            if (client == null)
+            {
+                return;
+            }
             while (client.Connected)
             {
                 String responseData = String.Empty;
+                Byte[] data = new Byte[256];
+                Int32 bytes;
 
                 try
                 {
                     NetworkStream stream = client.GetStream();
 
-                    Byte[] data = new Byte[256];
-                    responseData = String.Empty;
-
-                    Int32 bytes = stream.Read(data, 0, data.Length);
-                    responseData = Encoding.ASCII.GetString(data, 0, bytes);
+                    while ((bytes = stream.Read(data, 0, data.Length)) > 0) {
+                        responseData += Encoding.ASCII.GetString(data, 0, bytes);
+                    }
+                    // richTextBox1.Text = responseData;
+                    
                 }
                 catch (Exception)
                 {
@@ -230,6 +232,16 @@ namespace client
             {
                 this.client.Close();
             }
+        }
+
+        private void buttonStartGame_Click(object sender, EventArgs e)
+        {
+            Thread get = new Thread(recieve_data);
+            get.Start();
+            Thread set = new Thread(talkToServer);
+            set.Start();
+
+            buttonStartGame.Visible = false;
         }
     }
 }
