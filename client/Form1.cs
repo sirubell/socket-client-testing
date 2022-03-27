@@ -6,8 +6,11 @@ namespace client
     public partial class formgame : Form
     {
         TcpClient? client = null;
+
         string dir = "";
-        
+        int num_player = 0;
+        List<PictureBox> blocks = new List<PictureBox>();
+        List<PictureBox> players = new List<PictureBox>();
         public formgame()
         {
             InitializeComponent();
@@ -16,8 +19,26 @@ namespace client
             Thread set = new Thread(talkToServer);
             set.Start();
 
+
+
             KeyDown += Form_KeyDown!;
             KeyUp += Form_KeyUp!;
+        }
+
+        private void create()
+        {
+            PictureBox pictureBox = new PictureBox();
+            pictureBox.Visible = true;
+            pictureBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            blocks.Add(pictureBox);
+
+            for (int i = 0; i < 4; i++)
+            {
+                pictureBox = new PictureBox();
+                pictureBox.Visible = false;
+                pictureBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+                blocks.Add(pictureBox);
+            }
         }
 
         private bool Connect(String server)
@@ -92,6 +113,60 @@ namespace client
                 {
 
                 }
+
+                foreach (var player in players)
+                {
+                    player.Visible = false;
+                }
+
+                int x = 0, y = 0;
+                var f = "";
+                var cur = "";
+                foreach (var player in players)
+                {
+                    if(player.Name == cur)
+                    {
+                        for (int i = 0; i < a.Count; i++)
+                        {
+                            PictureBox? temp = players.Find(x => x.Name == f);
+                            if (temp != null)
+                            {
+                                temp.Size = new Size(x, y);
+                                temp.Location = new Point(x, y);
+                                temp.Visible = true;
+                                temp.BackColor = Color.White;
+                                player.Parent = temp;
+                            }
+                            else
+                            {
+                                temp = new PictureBox();
+                                temp.Name = f;
+                                temp.Size = new Size(x, y);
+                                temp.Location = new Point(x, y);
+                                temp.Visible = true;
+                                temp.BackColor = Color.White;
+                                player.Parent = temp;
+
+                                players.Add(temp);
+                            }
+                        }
+
+                        player.BackColor = Color.Black;
+                        break;
+                    }
+                }
+                
+                for (int i = 0; i < blocks.Count; i++)
+                {
+                    blocks[i].Location = new Point(x, y);
+                    blocks[i].Size = new Size(x, y);
+                }
+
+                DateTime now = DateTime.Now;
+                do
+                {
+                    Application.DoEvents();
+                } while ((DateTime.Now - now).TotalMilliseconds < 10);
             }
         }
 
